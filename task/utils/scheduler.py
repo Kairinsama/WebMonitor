@@ -1,6 +1,7 @@
 import logging
 import traceback
 from datetime import datetime
+from urllib.parse import urljoin
 
 import markdown
 from apscheduler.jobstores.base import JobLookupError
@@ -128,6 +129,19 @@ def monitor(id, type):
             regular_expression = task.regular_expression
             rule = task.rule
             headers = task.headers
+
+            is_nested = task.is_nested
+            nested_url_selector = task.nested_url_selector
+            nested_selector_type = task.nested_selector_type
+
+            if is_nested == 1:
+                target_url = get_content(url, is_chrome, nested_selector_type,
+                                         nested_url_selector, '', None,
+                                         headers, task_id=id)
+                if target_url:
+                    url = urljoin(url, target_url.strip())
+                else:
+                    raise Exception('二级页面URL提取失败')
 
             try:
                 last = Content.objects.get(task_id=id, task_type=type)

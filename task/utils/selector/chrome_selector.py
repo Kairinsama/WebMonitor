@@ -1,5 +1,6 @@
 import ast
 import warnings
+import time
 from collections import OrderedDict
 import os
 
@@ -51,6 +52,7 @@ class ChromeSelector(FatherSelector):
 
         try:
             driver.get(url)
+            time.sleep(2)
             
             # Screenshot logic
             if task_id:

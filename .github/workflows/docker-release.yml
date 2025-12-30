@@ -7,17 +7,16 @@ on:
 jobs:
     release:
         runs-on: ubuntu-latest
+        permissions:
+            packages: write
+            contents: read
         steps:
         -
             name: Checkout
             uses: actions/checkout@v1
         -
-            name: Dockerhub login
-            env:
-                DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-            run: |
-                echo "${DOCKER_PASSWORD}" | docker login --username ${DOCKER_USERNAME} --password-stdin
+            name: Login to GitHub Container Registry
+            run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
         -
             name: Set up Docker Buildx
             id: buildx
@@ -26,11 +25,9 @@ jobs:
                 version: latest
         -
             name: Build dockerfile (with push)
-            env:
-                DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
             run: |
                 docker buildx build \
                 --platform linux/amd64,linux/arm64 \
                 --output "type=image,push=true" \
                 --file ./Dockerfile . \
-                --tag $(echo "${DOCKER_USERNAME}" | tr '[:upper:]' '[:lower:]')/webmonitor:latest
+                --tag ghcr.io/$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]'):latest

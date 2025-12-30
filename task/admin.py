@@ -43,11 +43,14 @@ class TaskAdmin(ImportExportModelAdmin):
     resource_class = TaskResource
 
     list_display = [
-        'id', 'name', 'url', 'frequency', 'selector', 'create_time',
-        'is_chrome', 'regular_expression', 'rule', 'headers'
+        'id', 'name', 'url', 'is_nested', 'nested_selector_type',
+        'nested_url_selector', 'selector_type', 'selector', 'frequency',
+        'create_time', 'is_chrome', 'regular_expression', 'rule', 'headers'
     ]
-    list_editable = ('name', 'url', 'frequency', 'is_chrome',
-                     'regular_expression', 'rule', 'headers', 'selector')
+    list_editable = ('name', 'url', 'is_nested', 'nested_selector_type',
+                     'nested_url_selector', 'selector_type', 'selector',
+                     'frequency', 'is_chrome', 'regular_expression', 'rule',
+                     'headers')
     filter_horizontal = ('notification', )
 
     list_per_page = 10

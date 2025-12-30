@@ -12,11 +12,12 @@ COPY . /app
 WORKDIR /app
 
 RUN set -x; buildDeps='wget build-essential' \
-&& apt-get update && apt-get install -y ${buildDeps} \ 
+&& apt-get update && apt-get install -y --no-install-recommends ${buildDeps} \ 
 chrpath libssl-dev libxft-dev libfreetype6 libfreetype6-dev libfontconfig1 libfontconfig1-dev \
 chromium chromium-driver fonts-wqy-zenhei \
 && rm -rf /var/lib/apt/lists/* \
 && pip install --upgrade "setuptools<58.0.0" \
+&& pip install "pip<24.1" \
 && pip install -r requirements.txt && pip cache purge \
 && apt-get purge -y --auto-remove $buildDeps
 

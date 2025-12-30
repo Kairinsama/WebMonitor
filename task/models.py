@@ -111,6 +111,20 @@ class Task(models.Model):
         (2, 'JsonPath'),
     )
 
+    is_nested_choices = ((0, 'no'), (1, 'yes'))
+    is_nested = models.IntegerField(null=False,
+                                    default=0,
+                                    verbose_name='是否二级页面监控',
+                                    choices=is_nested_choices)
+    nested_selector_type = models.IntegerField(verbose_name='二级页面URL选择器类型',
+                                               null=False,
+                                               default=0,
+                                               choices=selector_choices)
+    nested_url_selector = models.CharField(max_length=500,
+                                           verbose_name='二级页面URL选择器',
+                                           blank=True,
+                                           help_text='只支持一个元素选择器，用于提取二级页面的URL。如果是Xpath，请确保提取的是href属性，例如：//*[@id="id3"]/a/@href')
+
     selector_type = models.IntegerField(verbose_name='元素选择器类型',
                                         null=False,
                                         default='Xpath',

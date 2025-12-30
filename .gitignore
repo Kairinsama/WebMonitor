@@ -1,6 +1,6 @@
 .vscode/*
 setting/management/__pycache__/*
-db/db.sqlite3
+db/
 static/*
 task/utils/notification/__pycache__/*
 setting/management/commands/__pycache__/*
@@ -11,3 +11,4 @@ task/utils/selector/__pycache__/*
 */__pycache__
 .env
 ghostdriver.log
+venv/
