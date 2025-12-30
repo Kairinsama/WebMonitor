@@ -137,7 +137,7 @@ def monitor(id, type):
             last_content = last.content
             content = get_content(url, is_chrome, selector_type, selector,
                                   content_template, regular_expression,
-                                  headers)
+                                  headers, task_id=id)
             global_content = content
             status_code = is_changed(rule, content, last_content)
             logger.info(

@@ -22,7 +22,7 @@ class RequestsSelector(FatherSelector):
         html = r.text
         return html
 
-    def get_by_xpath(self, url, selector_dict, headers=None):
+    def get_by_xpath(self, url, selector_dict, headers=None, task_id=None):
         html = self.get_html(url, headers)
 
         result = OrderedDict()
@@ -31,7 +31,7 @@ class RequestsSelector(FatherSelector):
 
         return result
 
-    def get_by_css(self, url, selector_dict, headers=None):
+    def get_by_css(self, url, selector_dict, headers=None, task_id=None):
         html = self.get_html(url, headers)
 
         result = OrderedDict()
@@ -40,7 +40,7 @@ class RequestsSelector(FatherSelector):
 
         return result
 
-    def get_by_json(self, url, selector_dict, headers=None):
+    def get_by_json(self, url, selector_dict, headers=None, task_id=None):
         html = self.get_html(url, headers)
 
         result = OrderedDict()

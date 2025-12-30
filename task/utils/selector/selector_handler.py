@@ -5,14 +5,14 @@
 @Date: 2019-03-25 12:27:44
 @LastEditTime: 2019-03-30 15:59:08
 '''
-from task.utils.selector.phantomjs_selector import PhantomJSSelector
+from task.utils.selector.chrome_selector import ChromeSelector
 from task.utils.selector.request_selector import RequestsSelector
 
 
 def new_handler(name, debug=False):
     if name == 'request':
         return RequestsSelector(debug)
-    elif name == 'phantomjs':
-        return PhantomJSSelector(debug)
+    elif name == 'phantomjs' or name == 'chrome':
+        return ChromeSelector(debug)
     else:
         raise Exception()

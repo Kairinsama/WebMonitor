@@ -6,7 +6,7 @@
 
 
 ## Features
-* Support for 'requests' web pages and grabbing asynchronously loaded pages using PhantomJS
+* Support for 'requests' web pages and grabbing asynchronously loaded pages using Chrome Headless
 * Support for xpath and CSS selector, and JsonPath to extract JSON data
 * Support email, pushover, and WeChat alerts (support by server酱)
 * Simple UI, visual operation

@@ -40,11 +40,12 @@ def get_content(url,
                 content_template,
                 regular_expression=None,
                 headers=None,
-                debug=False):
+                debug=False,
+                task_id=None):
     if is_chrome == 0:
         selector_handler = new_handler('request', debug)
     else:
-        selector_handler = new_handler('phantomjs', debug)
+        selector_handler = new_handler('chrome', debug)
 
     # 兼容旧版本，默认转为{content}
     selector_dict = OrderedDict()
@@ -60,12 +61,13 @@ def get_content(url,
 
     if selector_type == 0:
         content_dict = selector_handler.get_by_xpath(url, selector_dict,
-                                                     headers)
+                                                     headers, task_id)
     elif selector_type == 1:
-        content_dict = selector_handler.get_by_css(url, selector_dict, headers)
+        content_dict = selector_handler.get_by_css(url, selector_dict, headers,
+                                                   task_id)
     elif selector_type == 2:
         content_dict = selector_handler.get_by_json(url, selector_dict,
-                                                    headers)
+                                                    headers, task_id)
     else:
         logger.error('无效选择器')
         raise Exception('无效选择器')

@@ -15,7 +15,7 @@ Install dependencies after download is complete.
 pip install -r requirements.txt
 ```
 
-If you need to use a headless browser, make sure 'phantomjs' is installed and added to the system path.
+If you need to use a headless browser, make sure Chrome/Chromium and chromedriver are installed and added to the system path.
 
 For the first run, the database should be migrated and the admin account should be set, assuming the account is 'admin', password is 'password' and the port is '8000'.
 
